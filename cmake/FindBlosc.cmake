@@ -37,7 +37,7 @@
 
 FIND_PACKAGE ( PackageHandleStandardArgs )
 
-FIND_PATH( BLOSC_LOCATION include\blosc.h
+FIND_PATH( BLOSC_LOCATION include/blosc.h
   "$ENV{BLOSC_ROOT}"
   NO_DEFAULT_PATH
   NO_SYSTEM_ENVIRONMENT_PATH
