@@ -47,6 +47,9 @@
 #include <limits>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread/thread.hpp>
+#include <time.h> // for nanosleep()
+
+#include <openvdb/openvdb.h>
 
 #ifdef OPENVDB_USE_GLFW_3
 //#define GLFW_INCLUDE_GLU
@@ -248,6 +251,7 @@ windowRefreshCB()
 Viewer
 init(const std::string& progName, bool background)
 {
+	glewInit();
     if (sViewer == NULL) {
         tbb::mutex::scoped_lock lock(sLock);
         if (sViewer == NULL) {
@@ -835,7 +839,11 @@ ViewerImpl::sleep(double secs)
 {
     secs = fabs(secs);
     int isecs = int(secs);
-    boost::this_thread::sleep(boost::posix_time::seconds(isecs));
+    //boost::this_thread::sleep(boost::posix_time::seconds(isecs));
+    struct timespec sleepTime = { isecs /*sec*/, int(1.0e9 * (secs - isecs)) /*nsec*/ };
+    //nanosleep(&sleepTime, /*remainingTime=*/NULL);
+	//sleep(sleepTime.tv_sec/*remainingTime=*/);
+	Sleep ( secs * 1000.0 );		// windows sleep in ms
 }
 
 

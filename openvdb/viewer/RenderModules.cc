@@ -37,6 +37,8 @@
 
 #include <math.h>
 
+#include <openvdb/openvdb.h>
+#include <openvdb\tree\LeafNode.h>
 
 namespace openvdb_viewer {
 
@@ -390,6 +392,7 @@ ShaderProgram::ShaderProgram():
     mVertShader(0),
     mFragShader(0)
 {
+	glewInit();
 }
 
 ShaderProgram::~ShaderProgram() { clear(); }

@@ -38,7 +38,7 @@
 
 FIND_PACKAGE ( PackageHandleStandardArgs )
 
-FIND_PATH ( OPENEXR_LOCATION include/OpenEXR/OpenEXRConfig.h
+FIND_PATH ( OPENEXR_LOCATION include/OpenEXRConfig.h
   ENV OPENEXR_ROOT
   NO_DEFAULT_PATH
   NO_SYSTEM_ENVIRONMENT_PATH
@@ -48,15 +48,15 @@ FIND_PACKAGE_HANDLE_STANDARD_ARGS ( OpenEXR
   REQUIRED_VARS OPENEXR_LOCATION
   )
 
-OPTION ( OPENEXR_NAMESPACE_VERSIONING "Namespace versioning of libraries" ON )
+OPTION ( OPENEXR_NAMESPACE_VERSIONING "Namespace versioning of libraries" OFF )
 
 IF ( OPENEXR_FOUND )
 
-  FILE ( STRINGS "${OPENEXR_LOCATION}/include/OpenEXR/OpenEXRConfig.h" _openexr_version_major_string REGEX "#define OPENEXR_VERSION_MAJOR ")
+  FILE ( STRINGS "${OPENEXR_LOCATION}/include/OpenEXRConfig.h" _openexr_version_major_string REGEX "#define OPENEXR_VERSION_MAJOR ")
   STRING ( REGEX REPLACE "#define OPENEXR_VERSION_MAJOR" "" _openexr_version_major_unstrip "${_openexr_version_major_string}")
   STRING ( STRIP ${_openexr_version_major_unstrip} OPENEXR_VERSION_MAJOR )
 
-  FILE ( STRINGS "${OPENEXR_LOCATION}/include/OpenEXR/OpenEXRConfig.h" _openexr_version_minor_string REGEX "#define OPENEXR_VERSION_MINOR ")
+  FILE ( STRINGS "${OPENEXR_LOCATION}/include/OpenEXRConfig.h" _openexr_version_minor_string REGEX "#define OPENEXR_VERSION_MINOR ")
   STRING ( REGEX REPLACE "#define OPENEXR_VERSION_MINOR" "" _openexr_version_minor_unstrip "${_openexr_version_minor_string}")
   STRING ( STRIP ${_openexr_version_minor_unstrip} OPENEXR_VERSION_MINOR )
   
@@ -105,7 +105,8 @@ IF ( OPENEXR_FOUND )
       FIND_LIBRARY ( Openexr_ILMIMF_LIBRARY ${ILMIMF_LIBRARY_NAME} PATHS ${OPENEXR_LIBRARYDIR} )
       # Load library
       SET(CMAKE_FIND_LIBRARY_SUFFIXES ".dll")
-      FIND_LIBRARY ( Openexr_ILMIMF_DLL ${ILMIMF_LIBRARY_NAME} PATHS ${OPENEXR_LOCATION}/bin )
+      #FIND_LIBRARY ( Openexr_ILMIMF_DLL ${ILMIMF_LIBRARY_NAME} PATHS ${OPENEXR_LOCATION}/bin )
+	  FIND_LIBRARY ( Openexr_ILMIMF_DLL ${ILMIMF_LIBRARY_NAME} PATHS ${OPENEXR_LIBRARYDIR} )
       # MUST reset
       SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
     ELSE (APPLE)
