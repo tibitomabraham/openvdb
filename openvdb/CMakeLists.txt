@@ -190,7 +190,7 @@ ADD_LIBRARY ( openvdb_shared SHARED
 #  ${Tbb_TBB_LIBRARY}
 #  ${Ilmbase_HALF_LIBRARY}
 #  ${ZLIB_LIBRARY}
-  )
+#  )
 TARGET_LINK_LIBRARIES ( openvdb_shared
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARY}
