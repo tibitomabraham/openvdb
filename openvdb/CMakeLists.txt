@@ -135,7 +135,7 @@ INCLUDE_DIRECTORIES ( ${BLOSC_INCLUDE_DIR} )
 INCLUDE_DIRECTORIES ( ${CPPUNIT_INCLUDE_DIR} )
 
 IF (WIN32)
-  ADD_DEFINITIONS ( -DWIN32 -D_WINDOWS -DOPENVDB_3_ABI_COMPATIBLE -D_WIN32 -DNOMINMAX -DOPENVDB_STATICLIB -DOPENEXR_DLL -DOPENVDB_USE_GLFW_3  )
+  ADD_DEFINITIONS ( -D_WIN32 -DNOMINMAX -DOPENVDB_DLL -DOPENEXR_DLL -DOPENVDB_USE_GLFW_3  )
 ELSE ()
   ADD_DEFINITIONS ( -pthread -fPIC )
 ENDIF ()
@@ -177,19 +177,19 @@ SET_SOURCE_FILES_PROPERTIES ( ${OPENVDB_LIBRARY_SOURCE_FILES}
   COMPILE_FLAGS "-DOPENVDB_PRIVATE -DOPENVDB_USE_BLOSC ${OPENVDB_USE_GLFW_FLAG}"
 )
 
-ADD_LIBRARY ( openvdb_static STATIC
-  ${OPENVDB_LIBRARY_SOURCE_FILES}
-  )
+#ADD_LIBRARY ( openvdb_static STATIC
+#  ${OPENVDB_LIBRARY_SOURCE_FILES}
+#  )
 ADD_LIBRARY ( openvdb_shared SHARED
   ${OPENVDB_LIBRARY_SOURCE_FILES}
   )
 
-TARGET_LINK_LIBRARIES ( openvdb_static
-  ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARY}
-  ${Tbb_TBB_LIBRARY}
-  ${Ilmbase_HALF_LIBRARY}
-  ${ZLIB_LIBRARY}
+#TARGET_LINK_LIBRARIES ( openvdb_static
+#  ${Boost_LIBRARIES}
+#  ${PYTHON_LIBRARY}
+#  ${Tbb_TBB_LIBRARY}
+#  ${Ilmbase_HALF_LIBRARY}
+#  ${ZLIB_LIBRARY}
   )
 TARGET_LINK_LIBRARIES ( openvdb_shared
   ${Boost_LIBRARIES}
@@ -200,9 +200,9 @@ TARGET_LINK_LIBRARIES ( openvdb_shared
   ${BLOSC_blosc_LIBRARY}
   )
 
-SET_TARGET_PROPERTIES ( openvdb_static
-  PROPERTIES OUTPUT_NAME openvdb
-  )
+#SET_TARGET_PROPERTIES ( openvdb_static
+#  PROPERTIES OUTPUT_NAME openvdb
+#  )
 
 SET_TARGET_PROPERTIES(
   openvdb_shared
@@ -223,7 +223,7 @@ ADD_EXECUTABLE ( vdb_print
   )
 
 TARGET_LINK_LIBRARIES ( vdb_print
-  openvdb_static
+  openvdb_shared
   ${BLOSC_blosc_LIBRARY}
   )
 
@@ -237,7 +237,7 @@ ADD_EXECUTABLE ( vdb_render
   )
 
 TARGET_LINK_LIBRARIES ( vdb_render
-  openvdb_static
+  openvdb_shared
   ${BLOSC_blosc_LIBRARY}
   ${Openexr_ILMIMF_LIBRARY}
   ${Ilmbase_ILMTHREAD_LIBRARY}
@@ -262,7 +262,7 @@ SET_SOURCE_FILES_PROPERTIES ( ${VDB_VIEW_SOURCE_FILES}
 	)
 
 TARGET_LINK_LIBRARIES ( vdb_view
-  openvdb_static
+  openvdb_shared
   ${BLOSC_blosc_LIBRARY}
   ${OPENGL_gl_LIBRARY}
   ${OPENGL_glu_LIBRARY}
@@ -378,7 +378,7 @@ IF ( OPENVDB_BUILD_UNITTESTS )
 
 TARGET_LINK_LIBRARIES ( vdb_test
 	${CPPUnit_cppunit_LIBRARY}
-	openvdb_static
+	openvdb_shared
 	${BLOSC_blosc_LIBRARY}
 	)
 
@@ -407,7 +407,7 @@ SET ( OPENVDB_PYTHON_MODULE_SOURCE_FILES
 	)
 
   TARGET_LINK_LIBRARIES ( pyopenvdb
-	openvdb_static
+	openvdb_shared
 	${BLOSC_blosc_LIBRARY}
 	${OPENGL_gl_LIBRARY}
 	${OPENGL_glu_LIBRARY}
@@ -470,7 +470,7 @@ INSTALL ( TARGETS
   )
 
 INSTALL ( TARGETS
-  openvdb_static
+#  openvdb_static
   openvdb_shared
   DESTINATION
   lib
