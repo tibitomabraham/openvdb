@@ -466,7 +466,7 @@ INSTALL ( TARGETS
   vdb_print
   vdb_render
   DESTINATION
-  lib
+  bin
   )
 
 INSTALL ( TARGETS
