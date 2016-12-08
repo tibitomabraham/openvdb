@@ -170,27 +170,27 @@ SET ( OPENVDB_LIBRARY_SOURCE_FILES
   openvdb.cc
   util/Formats.cc
   util/Util.cc
+# Viewer Specific Files
+  viewer/Camera.cc
+  viewer/ClipBox.cc
+  viewer/Font.cc
+  viewer/RenderModules.cc
+  viewer/Viewer.cc
+# Viewer previously was an exe with a main function. 
+# Disabling the main function since it is made part 
+# of the shared library.
+#cmd/openvdb_view/main.cc 
   )
 
 SET_SOURCE_FILES_PROPERTIES ( ${OPENVDB_LIBRARY_SOURCE_FILES}
   PROPERTIES
-  COMPILE_FLAGS "-DOPENVDB_PRIVATE -DOPENVDB_USE_BLOSC ${OPENVDB_USE_GLFW_FLAG}"
+  COMPILE_FLAGS "-DOPENVDB_PRIVATE -DOPENVDB_USE_BLOSC ${OPENVDB_USE_GLFW_FLAG} -DGL_GLEXT_PROTOTYPES=1"
 )
 
-#ADD_LIBRARY ( openvdb_static STATIC
-#  ${OPENVDB_LIBRARY_SOURCE_FILES}
-#  )
 ADD_LIBRARY ( openvdb_shared SHARED
   ${OPENVDB_LIBRARY_SOURCE_FILES}
   )
-
-#TARGET_LINK_LIBRARIES ( openvdb_static
-#  ${Boost_LIBRARIES}
-#  ${PYTHON_LIBRARY}
-#  ${Tbb_TBB_LIBRARY}
-#  ${Ilmbase_HALF_LIBRARY}
-#  ${ZLIB_LIBRARY}
-#  )
+  
 TARGET_LINK_LIBRARIES ( openvdb_shared
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARY}
@@ -198,11 +198,13 @@ TARGET_LINK_LIBRARIES ( openvdb_shared
   ${Ilmbase_HALF_LIBRARY}
   ${ZLIB_LIBRARY}
   ${BLOSC_blosc_LIBRARY}
+# Viewer Specific Libraries
+  ${OPENGL_gl_LIBRARY}
+  ${OPENGL_glu_LIBRARY}
+  ${GLFW_LINK_LIBRARY}
+  ${GLFW_DEPENDENT_LIBRARIES}
+  ${GLEW_GLEW_LIBRARY}
   )
-
-#SET_TARGET_PROPERTIES ( openvdb_static
-#  PROPERTIES OUTPUT_NAME openvdb
-#  )
 
 SET_TARGET_PROPERTIES(
   openvdb_shared
@@ -244,36 +246,10 @@ TARGET_LINK_LIBRARIES ( vdb_render
   ${Ilmbase_IEX_LIBRARY}
   )
 
-SET ( VDB_VIEW_SOURCE_FILES
-  cmd/openvdb_view/main.cc
-  viewer/Camera.cc
-  viewer/ClipBox.cc
-  viewer/Font.cc
-  viewer/RenderModules.cc
-  viewer/Viewer.cc
- )
 SET_SOURCE_FILES_PROPERTIES ( ${VDB_VIEW_SOURCE_FILES}
   PROPERTIES
   COMPILE_FLAGS "-DOPENVDB_USE_BLOSC ${OPENVDB_USE_GLFW_FLAG} -DGL_GLEXT_PROTOTYPES=1"
   )
-#IF (NOT WIN32)
-  ADD_LIBRARY ( vdb_view STATIC
-	${VDB_VIEW_SOURCE_FILES}
-	)
-
-TARGET_LINK_LIBRARIES ( vdb_view
-  openvdb_shared
-  ${BLOSC_blosc_LIBRARY}
-  ${OPENGL_gl_LIBRARY}
-  ${OPENGL_glu_LIBRARY}
-  ${COCOA_LIBRARY}
-  ${IOKIT_LIBRARY}
-  ${COREVIDEO_LIBRARY}
-  ${GLFW_LINK_LIBRARY}
-  ${GLFW_DEPENDENT_LIBRARIES}
-  ${GLEW_GLEW_LIBRARY}
-  )
-#ENDIF ()
 
 SET ( UNITTEST_SOURCE_FILES
 	unittest/main.cc
@@ -455,13 +431,6 @@ IF (OPENVDB_BUILD_DOCS)
 ENDIF ()
 
 # Installation
-#IF ( NOT WIN32 )
-  INSTALL ( TARGETS
-	vdb_view
-	DESTINATION
-	lib
-	)
-#ENDIF ()
 INSTALL ( TARGETS
   vdb_print
   vdb_render
@@ -470,7 +439,6 @@ INSTALL ( TARGETS
   )
 
 INSTALL ( TARGETS
-#  openvdb_static
   openvdb_shared
   DESTINATION
   lib
