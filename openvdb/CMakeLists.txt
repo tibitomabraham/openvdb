@@ -136,7 +136,7 @@ INCLUDE_DIRECTORIES ( ${BLOSC_INCLUDE_DIR} )
 INCLUDE_DIRECTORIES ( ${CPPUNIT_INCLUDE_DIR} )
 
 IF (WIN32)
-  ADD_DEFINITIONS ( -D_WIN32 -DNOMINMAX -DHALF_EXPORTS -DOPENVDB_DLL )
+  ADD_DEFINITIONS ( -D_WIN32 -DNOMINMAX -DOPENVDB_DLL -DOPENEXR_DLL )
 ELSE ()
   ADD_DEFINITIONS ( -pthread -fPIC )
 ENDIF ()
@@ -168,6 +168,7 @@ SET ( OPENVDB_LIBRARY_SOURCE_FILES
   points/AttributeGroup.cc
   points/AttributeSet.cc
   points/StreamCompression.cc
+  points/points.cc
   openvdb.cc
   util/Formats.cc
   util/Util.cc
