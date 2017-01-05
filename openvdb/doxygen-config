@@ -38,10 +38,17 @@ PROJECT_NAME           = "OpenVDB"
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
+<<<<<<< HEAD
 PROJECT_NUMBER         = 4.0.1
 
 ALIASES += vdbnamespace="openvdb::v4_0_1"
 PREDEFINED = OPENVDB_VERSION_NAME=v4_0_1
+=======
+PROJECT_NUMBER         = 3.3.0
+
+ALIASES += vdbnamespace="openvdb::v3_3_0"
+PREDEFINED = OPENVDB_VERSION_NAME=v3_3_0
+>>>>>>> 965cb44bf65c8d444a459540fb3bc9c08e54210b
 
 PREDEFINED += __declspec(x):= __attribute__(x):=
 PREDEFINED += OPENVDB_STATIC_SPECIALIZATION=""
