@@ -48,15 +48,15 @@ enum { DEFAULT_WIDTH = 900, DEFAULT_HEIGHT = 800 };
 /// @note Currently, the viewer window is a singleton (but that might change
 /// in the future), so although this function returns a new Viewer instance
 /// on each call, all instances are associated with the same window.
-Viewer init(const std::string& progName, bool background);
+OPENVDB_API Viewer init(const std::string& progName, bool background);
 
 /// @brief Destroy all viewer windows and release resources.
 /// @details This should be called from the main thread before your program exits.
-void exit();
+OPENVDB_API void exit();
 
 
 /// Manager for a window that displays OpenVDB grids
-class Viewer
+class OPENVDB_API Viewer
 {
 public:
     /// Set the size of and open the window associated with this viewer.

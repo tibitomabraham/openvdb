@@ -248,6 +248,7 @@ windowRefreshCB()
 Viewer
 init(const std::string& progName, bool background)
 {
+	glewInit();
     if (sViewer == NULL) {
         tbb::mutex::scoped_lock lock(sLock);
         if (sViewer == NULL) {

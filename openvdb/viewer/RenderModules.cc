@@ -390,6 +390,7 @@ ShaderProgram::ShaderProgram():
     mVertShader(0),
     mFragShader(0)
 {
+	    glewInit();
 }
 
 ShaderProgram::~ShaderProgram() { clear(); }
