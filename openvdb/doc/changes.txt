@@ -2,7 +2,6 @@
 
 @page changes Release Notes
 
-<<<<<<< HEAD
 @htmlonly <a name="v4_0_1_changes"></a>@endhtmlonly
 @par
 <B>Version 4.0.1</B> - <I>In development</I>
@@ -77,9 +76,7 @@ Houdini:
 
 
 @htmlonly <a name="v4_0_0_changes"></a>@endhtmlonly
-=======
 @htmlonly <a name="v3_3_0_changes"></a>@endhtmlonly
->>>>>>> 965cb44bf65c8d444a459540fb3bc9c08e54210b
 @par
 <B>Version 3.3.0</B> - <I>November 15, 2016</I>
 @par

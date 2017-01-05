@@ -40,31 +40,25 @@
 /// openvdb::vX_Y_Z::Vec3i, openvdb::vX_Y_Z::io::File, openvdb::vX_Y_Z::tree::Tree, etc.,
 /// where X, Y and Z are OPENVDB_LIBRARY_MAJOR_VERSION, OPENVDB_LIBRARY_MINOR_VERSION
 /// and OPENVDB_LIBRARY_PATCH_VERSION, respectively (defined below).
-<<<<<<< HEAD
 #define OPENVDB_VERSION_NAME v4_0_1
 
 // Library major, minor and patch version numbers
 #define OPENVDB_LIBRARY_MAJOR_VERSION_NUMBER 4
 #define OPENVDB_LIBRARY_MINOR_VERSION_NUMBER 0
 #define OPENVDB_LIBRARY_PATCH_VERSION_NUMBER 1
-=======
 #define OPENVDB_VERSION_NAME v3_3_0
 
 // Library major, minor and patch version numbers
 #define OPENVDB_LIBRARY_MAJOR_VERSION_NUMBER 3
 #define OPENVDB_LIBRARY_MINOR_VERSION_NUMBER 3
 #define OPENVDB_LIBRARY_PATCH_VERSION_NUMBER 0
->>>>>>> 965cb44bf65c8d444a459540fb3bc9c08e54210b
 
 /// @brief Library version number string of the form "<major>.<minor>.<patch>"
 /// @details This is a macro rather than a static constant because we typically
 /// want the compile-time version number, not the runtime version number
 /// (although the two are usually the same).
-<<<<<<< HEAD
 #define OPENVDB_LIBRARY_VERSION_STRING "4.0.1"
-=======
 #define OPENVDB_LIBRARY_VERSION_STRING "3.3.0"
->>>>>>> 965cb44bf65c8d444a459540fb3bc9c08e54210b
 
 /// Library version number as a packed integer ("%02x%02x%04x", major, minor, patch)
 #define OPENVDB_LIBRARY_VERSION_NUMBER \
