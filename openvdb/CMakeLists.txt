@@ -167,7 +167,8 @@ SET ( OPENVDB_LIBRARY_SOURCE_FILES
   points/AttributeArrayString.cc
   points/AttributeGroup.cc
   points/AttributeSet.cc
-  points/StreamCompression.cc  
+  points/StreamCompression.cc
+  points/points.cc
   openvdb.cc
   util/Formats.cc
   util/Util.cc
