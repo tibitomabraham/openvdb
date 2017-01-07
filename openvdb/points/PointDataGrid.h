@@ -1576,10 +1576,10 @@ setStreamingMode(PointDataTreeT& tree, bool on)
 
 
 /// @brief Global registration of point data-related types
-OPENVDB_API void initialize();
+void initialize();
 
 /// @brief Global deregistration of point data-related types
-OPENVDB_API void uninitialize();
+void uninitialize();
 
 } // namespace points
 
